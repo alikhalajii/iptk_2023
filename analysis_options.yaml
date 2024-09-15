@@ -1,0 +1,43 @@
+include: package:flutter_lints/flutter.yaml
+
+# Linting rules
+linter:
+  rules:
+    # General linting rules
+    camel_case_types: true
+    camel_case_extensions: true
+    constant_identifier_names: true
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    sort_pub_dependencies: false
+    avoid_return_types_on_setters: true
+    prefer_void_to_null: true
+    prefer_generic_function_type_aliases: false
+
+    # Null safety linting rules (for Dart 2.12+)
+    always_require_non_null_named_parameters: true
+    unnecessary_null_checks: false
+    prefer_if_null_operators: true
+    type_init_formals: true
+
+    # Flutter-specific linting rules
+    flutter_style_todos: false
+    sized_box_for_whitespace: true
+    unnecessary_const: true
+    use_key_in_widget_constructors: true
+    prefer_typing_uninitialized_variables: true
+    use_full_hex_values_for_flutter_colors: true
+    use_late_for_private_fields_and_variables: true
+    no_logic_in_create_state: true
+    avoid_print: false
+
+analyzer:
+  plugins:
+    - todo
+  exclude:
+    - "lib/accountPages/account_details_page_editable.dart"
+    - "lib/bookingProcessPages/components/booking_dialog.dart"
+
+
+
+

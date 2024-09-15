@@ -1,0 +1,37 @@
+stages:
+  - build
+  - test
+
+before_script:
+  - apk update
+  - apk add --no-cache curl git
+  - test -d /flutter || git clone https://github.com/flutter/flutter.git /flutter
+  - export PATH="/flutter/bin:$PATH"
+
+build_job:
+  stage: build
+  image: docker:24.0
+  script:
+    - apk update
+    - apk add --no-cache curl git
+    - export PATH="/flutter/bin:$PATH"
+    - sh -c 'flutter config --no-analytics'
+    - sh -c 'flutter channel beta'
+    - sh -c 'flutter upgrade'
+    - sh -c 'flutter config --enable-web'
+    - sh -c 'flutter pub get'
+    - sh -c 'flutter build'
+
+test_job:
+  stage: test
+  needs:
+    - job: build_job
+  image: docker:24.0
+  script:
+    - export PATH="/flutter/bin:$PATH"
+    - sh -c 'flutter config --no-analytics'
+    - sh -c 'flutter channel beta'
+    - sh -c 'flutter upgrade'
+    - sh -c 'flutter config --enable-web'
+    - sh -c 'flutter pub get'
+    - sh -c 'flutter test'
